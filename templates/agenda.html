@@ -1,0 +1,38 @@
+{% extends "model-page.html" %}
+{% block content%}
+    <h2>Agendamentos</h2>
+    <div class="row">
+        <div class="col-md-2 text-center">Título </div>
+        <div class="col-md-2 text-center">Data do Evento </div>
+        <div class="col-md-4 text-center">Descrição </div>
+        <div class="col-md-2">Local </div>
+        <div class="col-md-1">editar</div>
+        <div class="col-md-1">apagar</div>
+    </div>
+    <ul class="list-group">
+        {% for evento in eventos %}
+            <li class="list-group-item">
+                <div class="row" style={% if evento.get_evento_atrasado %} "color:red" {%endif%}>
+                    <div class="col-md-2">{{evento.titulo}} </div>
+                    <div class="col-md-2">{{evento.get_data_evento}} </div>
+                    <div class="col-md-4">{{evento.descricao}} </div>
+                    <div class="col-md-2">{{evento.local}} </div>
+                    <div class="col-md-1 text-center">
+                        <a href="evento/?id={{evento.id}}">
+                            <i class='fas fa-pencil-alt'></i>
+                        </a>
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <a href="evento/delete/{{evento.id}}">
+                            <i class='fas fa-trash-alt'></i>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="evento">
+        <button type="button" class="btn btn-primary">novo evento</button>
+    </a>
+
+{% endblock%}
